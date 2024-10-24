@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { IProduct } from './product.model';
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -22,7 +23,9 @@ export class CatalogComponent {
   //better to have service injection in constructor because of testing manners
   constructor(
     private cartSvc: CartService, 
-    private productSvc: ProductService) {
+    private productSvc: ProductService,
+    private router: Router,
+    private route: ActivatedRoute) {
     // this.product = {
     //   id: 2,
     //   description: "A friendly robot head with two eyes and a smile -- great for domestic use.",
@@ -219,10 +222,17 @@ export class CatalogComponent {
     this.productSvc.getProducts().subscribe(products => {
       this.products = products;
     });
+    //set catalog/filter like catalog/Arms, catalog/Bases
+    // this.route.params.subscribe((params) => {
+      this.route.queryParams.subscribe((params) => {
+      this.filter = params['filter'] ?? '';
+    })
   }
 
   addToCart(product: IProduct) {
     this.cartSvc.add(product);
+    //navigate to cart after adding a product to cart
+    this.router.navigate(['/cart'])
   }
 
   getFilteredProducts() {
