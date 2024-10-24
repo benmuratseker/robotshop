@@ -1,0 +1,59 @@
+<div class="product">
+    <div class="product-details">
+      <!-- string interpolation below -->
+      <!-- <img src="{{'/assets/images/robot-parts/' + product.imageName}}" [alt]="product.name" /> -->
+
+       <!-- attribute binding below -->
+      <!-- <img [src]="'/assets/images/robot-parts/'+product.imageName" [alt]="product.name" /> -->
+
+      <!-- call with function -->
+      <!-- <img [src]="getImageUrl(product)" [alt]="product?.name" /> -->
+      <img [src]="getImageUrl(product)" [alt]="product.name" />
+      <div class="product-info">
+        <!-- <div class="name red">{{ product?.name }}</div> -->
+        <div class="name red">{{ product.name }}</div>
+        <!-- <div class="description">{{ product?.description }}</div> -->
+        <div class="description">{{ product.description }}</div>
+        <!-- <div class="category">Part Type: {{ product?.category }}</div> -->
+        <div class="category">Part Type: {{ product.category }}</div>
+        <!-- ? -> named here in Angular as Safe Navigation Operator -->
+      </div>
+    </div>
+    <div class="price">
+      <!-- <div *ngIf="product.discount === 0">${{ product?.price.toFixed(2) }}</div> -->
+
+      <!-- using pipes -->
+      <!-- <div *ngIf="product.discount === 0">{{ product?.price | currency }}</div> -->
+      <!-- <div *ngIf="product.discount === 0">{{ product?.price | currency:'EUR' }}</div> -->
+
+      <!-- <div class="strikethrough"> -->
+      <!-- <div [class.strikethrough]="product.discount > 0"> -->
+      <!-- <div [ngClass]=" { strikethrough: product.discount > 0 }"> -->
+
+      <!-- <div 
+        [style.color]="product.discount > 0 ? 'red' : ''"
+        [ngClass]="getDiscountedClasses(product)">
+        {{ product.price | currency:"EUR"}}
+      </div> -->
+
+      <!-- ngStyle directive -->
+      <div 
+        [ngStyle]="{ color : product.discount > 0 ? 'red' : ''}"
+        [ngClass]="getDiscountedClasses(product)">
+        {{ product.price | currency:"EUR"}}
+      </div>
+
+      <!-- <div [hidden]="product.discount > 0">${{ product?.price.toFixed(2) }}</div> -->
+      <!-- <div class="discount" *ngIf="product.discount > 0">
+        ${{ (product.price * (1 - product.discount)).toFixed(2) }} -->
+
+      <!-- using pipes -->
+      <!-- <div class="discount" *ngIf="product.discount > 0">
+          {{ (product.price * (1 - product.discount)) | currency }}
+      </div> -->
+      <div class="discount" *ngIf="product.discount > 0">
+        {{ (product.price * (1 - product.discount)) | currency:'EUR' }}
+    </div>
+      <button class="cta" (click)="buyButtonClicked(product)">Buy</button>
+    </div>
+  </div>
