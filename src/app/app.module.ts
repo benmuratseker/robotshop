@@ -10,8 +10,9 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './cart/cart.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SignInComponent } from './user/sign-in/sign-in.component';
-import { TemplateFormControlsComponent } from './user/template-form-controls/template-form-controls.component';
+import { UserModule } from './user/user.module';
+// import { SignInComponent } from './user/sign-in/sign-in.component';
+// import { TemplateFormControlsComponent } from './user/template-form-controls/template-form-controls.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,10 @@ import { TemplateFormControlsComponent } from './user/template-form-controls/tem
     SiteHeaderComponent,
     ProductDetailsComponent,
     CartComponent,
-    SignInComponent,
-    TemplateFormControlsComponent
+    // SignInComponent,
+    // TemplateFormControlsComponent
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, UserModule],
   providers: [],
   bootstrap: [AppComponent]
 })
